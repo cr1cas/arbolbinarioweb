@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./templatemain.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="head">
+        
+    </ui:define>
+    <ui:define name="content"> 
+        <style type="text/css">
+    .ui-diagram-element {   
+        width:8em; 
+        height:4em;     
+        line-height:4em;
+        text-align: center;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
+        border: 1px solid #646D7E;
+        background-color: #646D7E;
+        color: #ffffff;
+    }
+     
+    .ui-diagram-element:hover {
+        background-color: #828B9C;
+    }
+    </style>
+
+        <p:growl id="grwlErrores"/>
+        <p:diagram id="pnlArbol" value="#{arbolBinarioControlador.model}" style="height:400px" styleClass="ui-widget-content" />
+
+        <h:form>
+            <p:panel header="Panel Nuevo Nodo">
+                <p:outputLabel value="Dato:"/>
+                <p:inputText required="true" value="#{arbolBinarioControlador.dato}"/>
+                <p:commandButton ajax="false"  value="Agregar" action="#{arbolBinarioControlador.adicionarNodo()}"
+                                 update="@all" />
+                <p:commandButton value="InOrden" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
+
+
+
+            </p:panel>
+        </h:form>
+        <h:form>
+            <p:panel header="Llenar árbol">
+                <p:inputTextarea required="true" cols="40" value="#{arbolBinarioControlador.datoscsv}"/>
+                <p:commandButton value="LLenar Arbol" action="#{arbolBinarioControlador.extraerDatos()}"
+                                 update="@all" ajax="false"/>
+
+            </p:panel>
+        </h:form>
+        <h:form>
+
+            <p:panel header="Terminados en">
+                <p:inputText required="true" value="#{arbolBinarioControlador.terminado}"/>
+                <p:commandButton value="Buscar Terminados" action="#{arbolBinarioControlador.buscarTerminadosEn()}"
+                                 update="@all" ajax="false"/>
+                <p:commandButton value="Obtener árbol terminados" 
+                                 action="#{arbolBinarioControlador.encontrarTerminadosEn()}"
+                                 update="@all" ajax="false"/>
+
+            </p:panel>
+        </h:form>
+        <h:panelGroup rendered="#{arbolBinarioControlador.verInOrden}">
+            <p:panel header="InOrden">
+                <p:dataTable var="nodo" value="#{arbolBinarioControlador.arbol.inOrden()}">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{nodo}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+        </h:panelGroup>
+       
+        <p:panel header="PreOrden">
+            <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.preOrden()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{data}" />
+                    </p:column>
+
+                </p:dataTable>
+        </p:panel>
+        
+        <p:diagram id="pnlArbolTerminados" value="#{arbolBinarioControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />
+        
+    </ui:define>
+
+</ui:composition>
