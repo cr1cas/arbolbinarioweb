@@ -37,7 +37,18 @@ public class ArbolBinarioControlador implements Serializable {
     private ArbolBinario arbol = new ArbolBinario();
     private int dato;
     private boolean verInOrden = false;
-
+    
+    private boolean verPosOrden = false;
+    private boolean verPorNiveles = false;
+    private boolean verNivelOrdenado = false;
+    
+    private boolean verHojas = false;
+    private boolean verPodar = false;
+    private boolean verBalance = false;
+    private boolean verBorrarMayor = false;
+    private boolean verBorrarMenor = false;
+    private boolean verRamaMayor = false;
+    
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
     private int terminado;
     private ArbolBinario arbolTerminados = new ArbolBinario();
@@ -82,6 +93,81 @@ public class ArbolBinarioControlador implements Serializable {
         this.verInOrden = verInOrden;
     }
 
+    public boolean isVerPosOrden() {
+        return verPosOrden;
+    }
+
+    public void setVerPosOrden(boolean verPosOrden) {
+        this.verPosOrden = verPosOrden;
+    }
+
+    public boolean isVerPorNiveles() {
+        return verPorNiveles;
+    }
+
+    public void setVerPorNiveles(boolean verPorNiveles) {
+        this.verPorNiveles = verPorNiveles;
+    }
+
+    public boolean isVerNivelOrdenado() {
+        return verNivelOrdenado;
+    }
+
+    public void setVerNivelOrdenado(boolean verNivelOrdenado) {
+        this.verNivelOrdenado = verNivelOrdenado;
+    }
+
+    public boolean isVerHojas() {
+        return verHojas;
+    }
+
+    public void setVerHojas(boolean verHojas) {
+        this.verHojas = verHojas;
+    }
+
+    public boolean isVerPodar() {
+        return verPodar;
+    }
+
+    public void setVerPodar(boolean verPodar) {
+        this.verPodar = verPodar;
+    }
+
+    public boolean isVerBalance() {
+        return verBalance;
+    }
+
+    public void setVerBalance(boolean verBalance) {
+        this.verBalance = verBalance;
+    }
+
+    public boolean isVerBorrarMayor() {
+        return verBorrarMayor;
+    }
+
+    public void setVerBorrarMayor(boolean verBorrarMayor) {
+        this.verBorrarMayor = verBorrarMayor;
+    }
+
+    public boolean isVerBorrarMenor() {
+        return verBorrarMenor;
+    }
+
+    public void setVerBorrarMenor(boolean verBorrarMenor) {
+        this.verBorrarMenor = verBorrarMenor;
+    }
+
+    public boolean isVerRamaMayor() {
+        return verRamaMayor;
+    }
+
+    public void setVerRamaMayor(boolean verRamaMayor) {
+        this.verRamaMayor = verRamaMayor;
+    }
+    
+    
+    
+    
     public int getDato() {
         return dato;
     }
@@ -125,6 +211,94 @@ public class ArbolBinarioControlador implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
+    
+    public void habilitarPosOrden() {
+        try {
+            arbol.isLleno();
+            verPosOrden = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPorNiveles() {
+        try {
+            arbol.isLleno();
+            verPorNiveles = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    
+    public void habilitarNivelOrdenado() {
+        try {
+            arbol.isLleno();
+            verNivelOrdenado = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarHojas() {
+        try {
+            arbol.isLleno();
+            verHojas = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarPodar() {
+        try {
+            arbol.isLleno();
+            verPodar = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarBalance() {
+        try {
+            arbol.isLleno();
+            verBalance = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarBorrarMayor() {
+        try {
+            arbol.isLleno();
+            verBorrarMayor = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarBorrarMenor() {
+        try {
+            arbol.isLleno();
+            verBorrarMenor = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void habilitarRamaMayor() {
+        try {
+            arbol.isLleno();
+            verRamaMayor = true;
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public String darHojas() {
+        ArrayList it = this.arbol.getHojas();
+        return (recorrido(it, "Hojas del Arbol"));
+    }
+
 
     public DefaultDiagramModel getModel() {
         return model;
@@ -255,6 +429,30 @@ public class ArbolBinarioControlador implements Serializable {
             pintarArbolTerminados(reco.getIzquierda(), model, elementHijo, x - 5, y + 5);
             pintarArbolTerminados(reco.getDerecha(), model, elementHijo, x + 5, y + 5);
         }
+    }
+    
+    public String imprimirPorNiveles() {
+        ArrayList it = this.arbol.impNiveles();
+        return (recorrido(it, "Imprimir Por niveles"));
+    }
+    
+    private String recorrido(ArrayList it, String msg) {
+        int i = 0;
+        String r = msg + "\n";
+        while (i < it.size()) {
+            r += "\t" + it.get(i).toString() + "\n";
+            i++;
+        }
+        return (r);
+    }
+    
+    
+    
+    //Nivel Ordenado
+    public String porNivel(){
+        this.arbol.alturaArbol();
+        ArrayList it = this.arbol.imprimirNivel();
+        return (recorrido(it, "Imprimir Por niveles en orden!!!"));
     }
 
 }
