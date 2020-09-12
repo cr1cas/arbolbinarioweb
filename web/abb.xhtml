@@ -56,6 +56,15 @@
 
             </p:panel>
         </h:form>
+        
+        <h:form>
+            <p:panel header="Buscar Nodo en el Árbol">
+                <p:outputLabel value="Dato:"/>
+                <p:inputText required="true" value="#{arbolBinarioControlador.dato}"/>
+                <p:commandButton ajax="false"  value="Buscar Nodo" action="#{arbolBinarioControlador.esta(nodo)}" update="@all" />
+            </p:panel>
+        </h:form>
+        
         <h:form>
 
             <p:panel header="Terminados en">

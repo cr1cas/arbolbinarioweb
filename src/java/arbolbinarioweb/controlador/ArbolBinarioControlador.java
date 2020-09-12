@@ -36,6 +36,7 @@ public class ArbolBinarioControlador implements Serializable {
 
     private ArbolBinario arbol = new ArbolBinario();
     private int dato;
+    private int dato2;
     private boolean verInOrden = false;
     
     private boolean verPosOrden = false;
@@ -165,10 +166,7 @@ public class ArbolBinarioControlador implements Serializable {
         this.verRamaMayor = verRamaMayor;
     }
     
-    
-    
-    
-    public int getDato() {
+     public int getDato() {
         return dato;
     }
 
@@ -184,6 +182,15 @@ public class ArbolBinarioControlador implements Serializable {
         this.arbol = arbol;
     }
 
+    public int getDato2() {
+        return dato2;
+    }
+
+    public void setDato2(int dato2) {
+        this.dato2 = dato2;
+    }
+
+    
     /**
      * Creates a new instance of ArbolBinarioControlador
      */
@@ -191,6 +198,12 @@ public class ArbolBinarioControlador implements Serializable {
 
     }
 
+    /**
+     * @author Cristian Ospina
+     * @author Cristian Castañeda Espitia
+     * metodo adicionarNodo - agrega un dato al arbol grafico de la web
+     * este metodo llama a otro metodo adicionarNodo ubicado en el MODELO - ArbolBinario.java
+     */
     public void adicionarNodo() {
         try {
             arbol.adicionarNodo(dato, arbol.getRaiz());
@@ -202,7 +215,13 @@ public class ArbolBinarioControlador implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
-
+    
+    
+    /**
+     * @author Cristian Ospina
+     * @author Cristian Castañeda Espitia
+     * habilitarInOrden sirve para mostrar los datos cuando se de click sobre el boton
+     */
     public void habilitarInOrden() {
         try {
             arbol.isLleno();
@@ -211,7 +230,11 @@ public class ArbolBinarioControlador implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
-    
+    /**
+     * @author Cristian Ospina
+     * @author Cristian Castañeda Espitia
+     * habilitarPosOrden sirve para mostrar los datos cuando se de click sobre el boton
+     */
     public void habilitarPosOrden() {
         try {
             arbol.isLleno();
@@ -221,6 +244,11 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
+    /**
+     * @author Cristian Ospina
+     * @author Cristian Castañeda Espitia
+     * habilitarPosNiveles sirve para mostrar los datos cuando se de click sobre el boton
+     */
     public void habilitarPorNiveles() {
         try {
             arbol.isLleno();
@@ -231,6 +259,11 @@ public class ArbolBinarioControlador implements Serializable {
     }
     
     
+    /**
+     * @author Cristian Ospina
+     * @author Cristian Castañeda Espitia
+     * habilitarNivelOrdenado sirve para mostrar los datos cuando se de click sobre el boton
+     */
     public void habilitarNivelOrdenado() {
         try {
             arbol.isLleno();
@@ -294,6 +327,12 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
+    /**
+     * @author Cristian Ospina
+     * @author Cristian Castañeda Espitia
+     * darHojas - metodo para mostrar las hojas del arbol pintado
+     * @return 
+     */
     public String darHojas() {
         ArrayList it = this.arbol.getHojas();
         return (recorrido(it, "Hojas del Arbol"));
@@ -321,6 +360,16 @@ public class ArbolBinarioControlador implements Serializable {
 
     }
 
+    /**
+     * @author Cristian Ospina
+     * @author Cristian Castañeda Espitia
+     * @param reco - tipo Nodo - compara si el dato para pintarlo en el arbol, si llegase a ser null lo fija como raiz
+     * si ya existe una raiz lo va a ubicar segun corresponde de acuerdo a esta comparacion y el ciclo IF ejecutado
+     * @param model - tipo DefaultDiagramModel - crea las conexiones de los padres con los hijos
+     * @param padre - verifica cual es el padre para poder conectar el siguiente nodo
+     * @param x - indica la separacion entre los nodos al momento de agregar
+     * @param y - indica la separacion entre los nodos al momento de agregar 
+     */
     private void pintarArbol(Nodo reco, DefaultDiagramModel model, Element padre, int x, int y) {
 
         if (reco != null) {
@@ -345,6 +394,12 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
 
+    /**
+     * captura de excepciones
+     * extraerDatos - cuando se requieren introducir bastantes datos para fijarlos en el arbol se puede hacer en cantidad
+     * para agilizar el proceso.
+     * los datos deben ser separados por coma para poder ser pintados en el arbol
+     */
     public void extraerDatos() {
         try {
             arbol.setRaiz(null);
@@ -431,10 +486,17 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
+    /**
+     * author Cristian Ospina
+     * @author Cristian Castañeda Espitia
+     * metodo para imprimir los nodos e identificar el nivel de cada nodo
+     * @return - retorno un arreglo con los nodos
+     */
     public String imprimirPorNiveles() {
         ArrayList it = this.arbol.impNiveles();
         return (recorrido(it, "Imprimir Por niveles"));
     }
+    
     
     private String recorrido(ArrayList it, String msg) {
         int i = 0;
@@ -455,4 +517,26 @@ public class ArbolBinarioControlador implements Serializable {
         return (recorrido(it, "Imprimir Por niveles en orden!!!"));
     }
 
+    //Buscar Nodo en el Árbol
+     public String esta(Integer dato) {
+        boolean siEsta = this.arbol.buscar(dato2);
+        String r = "El dato:" + dato.toString() + "\n";
+        r += siEsta ? "Si se encuentra en el arbol" : "No se encuentra en el arbol";
+        return (r);
+    }
+     
+      public void esta() {
+        try {
+            arbol.adicionarNodo(dato, arbol.getRaiz());
+            
+            JsfUtil.addSuccessMessage("El dato ha sido adicionado");
+            dato2 = 0;
+            pintarArbol();
+
+        } catch (ArbolBinarioException ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+     
+     
 }
