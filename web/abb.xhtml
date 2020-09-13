@@ -39,7 +39,7 @@
                 <p:commandButton value="PorNiveles" action="#{arbolBinarioControlador.habilitarPorNiveles()}" update="@all" ajax="false"/>
                 <p:commandButton value="NivelOrdenado" action="#{arbolBinarioControlador.habilitarNivelOrdenado()}" update="@all" ajax="false"/>
                 <p:commandButton value="Hojas" action="#{arbolBinarioControlador.habilitarHojas()}" update="@all" ajax="false"/>
-                <p:commandButton value="Podar - NO FUNCIONA" action="#{arbolBinarioControlador.habilitarPodar()}" update="@all" ajax="false"/>
+                <p:commandButton value="Podar" action="#{arbolBinarioControlador.podar()}" update="@all" ajax="false"/>
                 <p:commandButton value="Balance" action="#{arbolBinarioControlador.habilitarBalance()}" update="@all" ajax="false"/>
                 <p:commandButton value="Borrar Mayor +- NO FUNCIONA" action="#{arbolBinarioControlador.habilitarBorrarMayor()}" update="@all" ajax="false"/>
                 <p:commandButton value="Borrar Menor - NO FUNCIONA" action="#{arbolBinarioControlador.habilitarBorrarMenor()}" update="@all" ajax="false"/>
@@ -146,17 +146,7 @@
             </p:panel>
         </h:panelGroup>
         
-        <h:panelGroup rendered="#{arbolBinarioControlador.verPodar}">
-            <p:panel header="Podar">
-                <p:dataTable var="dataPodar" value="#{arbolBinarioControlador.arbol.podar()}">
-                        <p:column headerText="Podar">
-                        <h:outputText value="#{dataPodar}" />
-                    </p:column>
-
-                </p:dataTable>
-
-            </p:panel>
-        </h:panelGroup>
+        
         
         <h:panelGroup rendered="#{arbolBinarioControlador.verBalance}">
             <p:panel header="Balance">
