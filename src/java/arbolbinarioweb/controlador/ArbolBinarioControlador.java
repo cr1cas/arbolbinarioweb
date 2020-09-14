@@ -35,8 +35,10 @@ public class ArbolBinarioControlador implements Serializable {
     private DefaultDiagramModel modelArbol2;
 
     private ArbolBinario arbol = new ArbolBinario();
+    
     private int dato;
     private int dato2;
+    private int dato3;
     private boolean verInOrden = false;
     
     private boolean verPosOrden = false;
@@ -46,11 +48,11 @@ public class ArbolBinarioControlador implements Serializable {
     private boolean verHojas = false;
     private boolean verPodar = false;
     private boolean verBalance = false;
-    private boolean verBorrarMayor = false;
-    private boolean verBorrarMenor = false;
+    
     private boolean verRamaMayor = false;
     
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
+    
     private int terminado;
     private ArbolBinario arbolTerminados = new ArbolBinario();
 
@@ -142,22 +144,6 @@ public class ArbolBinarioControlador implements Serializable {
         this.verBalance = verBalance;
     }
 
-    public boolean isVerBorrarMayor() {
-        return verBorrarMayor;
-    }
-
-    public void setVerBorrarMayor(boolean verBorrarMayor) {
-        this.verBorrarMayor = verBorrarMayor;
-    }
-
-    public boolean isVerBorrarMenor() {
-        return verBorrarMenor;
-    }
-
-    public void setVerBorrarMenor(boolean verBorrarMenor) {
-        this.verBorrarMenor = verBorrarMenor;
-    }
-
     public boolean isVerRamaMayor() {
         return verRamaMayor;
     }
@@ -173,6 +159,8 @@ public class ArbolBinarioControlador implements Serializable {
     public void setDato(int dato) {
         this.dato = dato;
     }
+    
+    
 
     public ArbolBinario getArbol() {
         return arbol;
@@ -190,6 +178,15 @@ public class ArbolBinarioControlador implements Serializable {
         this.dato2 = dato2;
     }
 
+    public int getDato3() {
+        return dato3;
+    }
+
+    public void setDato3(int dato3) {
+        this.dato3 = dato3;
+    }
+
+    
     
     /**
      * Creates a new instance of ArbolBinarioControlador
@@ -300,23 +297,6 @@ public class ArbolBinarioControlador implements Serializable {
         }
     }
     
-    public void habilitarBorrarMayor() {
-        try {
-            arbol.isLleno();
-            verBorrarMayor = true;
-        } catch (ArbolBinarioException ex) {
-            JsfUtil.addErrorMessage(ex.getMessage());
-        }
-    }
-    
-    public void habilitarBorrarMenor() {
-        try {
-            arbol.isLleno();
-            verBorrarMenor = true;
-        } catch (ArbolBinarioException ex) {
-            JsfUtil.addErrorMessage(ex.getMessage());
-        }
-    }
     
     public void habilitarRamaMayor() {
         try {
@@ -542,4 +522,38 @@ public class ArbolBinarioControlador implements Serializable {
           arbol.podar();
           pintarArbol();
       }
+      
+      public void borrarMayor(){
+          arbol.borrarMayor();
+          pintarArbol();
+      }
+      
+      public void borrarMenor(){
+          arbol.borrarMenor();
+          pintarArbol();
+      }
+      
+      
+          
+      //multiplicar valores
+      public void multiplicarValores(){
+          arbol.multiplicarValores();
+          pintarArbol();
+      }
+      
+
+
+      
+//       public void adicionarNodo() {
+//        try {
+//            arbol.adicionarNodo(dato, arbol.getRaiz());
+//            JsfUtil.addSuccessMessage("El dato ha sido adicionado");
+//            dato = 0;
+//            pintarArbol();
+//
+//        } catch (ArbolBinarioException ex) {
+//            JsfUtil.addErrorMessage(ex.getMessage());
+//        }
+//    }
+      
 }

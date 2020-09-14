@@ -28,7 +28,7 @@
 
         <p:growl id="grwlErrores"/>
         <p:diagram id="pnlArbol" value="#{arbolBinarioControlador.model}" style="height:400px" styleClass="ui-widget-content" />
-
+        
         <h:form>
             <p:panel header="Panel Nuevo Nodo">
                 <p:outputLabel value="Dato:"/>
@@ -41,12 +41,25 @@
                 <p:commandButton value="Hojas" action="#{arbolBinarioControlador.habilitarHojas()}" update="@all" ajax="false"/>
                 <p:commandButton value="Podar" action="#{arbolBinarioControlador.podar()}" update="@all" ajax="false"/>
                 <p:commandButton value="Balance" action="#{arbolBinarioControlador.habilitarBalance()}" update="@all" ajax="false"/>
-                <p:commandButton value="Borrar Mayor +- NO FUNCIONA" action="#{arbolBinarioControlador.habilitarBorrarMayor()}" update="@all" ajax="false"/>
-                <p:commandButton value="Borrar Menor - NO FUNCIONA" action="#{arbolBinarioControlador.habilitarBorrarMenor()}" update="@all" ajax="false"/>
+                <p:commandButton value="Borrar Mayor" action="#{arbolBinarioControlador.borrarMayor()}" update="@all" ajax="false"/>
+                <p:commandButton value="Borrar Menor" action="#{arbolBinarioControlador.borrarMenor()}" update="@all" ajax="false"/>
                 <p:commandButton value="Rama Mayor" action="#{arbolBinarioControlador.habilitarRamaMayor()}" update="@all" ajax="false"/>
                 
 
             </p:panel>
+            
+            <p:panel header="Panel Eliminar Nivel">
+            <p:outputLabel value="Dato:"/>
+            <p:inputText required="true" value="#{arbolBinarioControlador.dato2}"/>
+                <p:commandButton ajax="false"  value="Eliminar Nivel" action="#{arbolBinarioControlador.eliminarNivel()}" update="@all" />
+            </p:panel>
+            
+            <p:panel header="Multiplicar datos del arbol">
+            <p:outputLabel value="Ingrese dato:"/>
+            <p:inputText required="true" value="#{arbolBinarioControlador.dato3}"/>
+            <p:commandButton ajax="false"  value="Multiplicar" action="#{arbolBinarioControlador.multiplicarValores()}" update="@all" />
+            </p:panel>
+            
         </h:form>
         <h:form>
             <p:panel header="Llenar árbol">
@@ -160,29 +173,7 @@
             </p:panel>
         </h:panelGroup>
         
-        <h:panelGroup rendered="#{arbolBinarioControlador.verBorrarMayor}">
-            <p:panel header="BorrarMayor">
-                <p:dataTable var="dataBorrarMayor" value="#{arbolBinarioControlador.arbol.borrarMayor()}">
-                        <p:column headerText="BorrarMayor">
-                        <h:outputText value="#{dataBorrarMayor}" />
-                    </p:column>
-
-                </p:dataTable>
-
-            </p:panel>
-        </h:panelGroup>
         
-        <h:panelGroup rendered="#{arbolBinarioControlador.verBorrarMenor}">
-            <p:panel header="BorrarMenor">
-                <p:dataTable var="dataBorrarMenor" value="#{arbolBinarioControlador.arbol.borrarMenor()}">
-                        <p:column headerText="BorrarMenor">
-                        <h:outputText value="#{dataBorrarMenor}" />
-                    </p:column>
-
-                </p:dataTable>
-
-            </p:panel>
-        </h:panelGroup>
         
         <h:panelGroup rendered="#{arbolBinarioControlador.verRamaMayor}">
             <p:panel header="RamaMayor">
