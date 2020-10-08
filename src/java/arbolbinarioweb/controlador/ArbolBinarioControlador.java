@@ -534,6 +534,12 @@ public class ArbolBinarioControlador implements Serializable {
       }
       
       
+//      //eliminar nivel
+//      public void eliminarNivel(){
+//          arbol.eliminarNivel();
+//          pintarArbol();
+//      }
+      
           
       //multiplicar valores
       public void multiplicarValores(){

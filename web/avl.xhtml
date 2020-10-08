@@ -33,6 +33,15 @@
                 <p:commandButton ajax="false"  value="Agregar" action="#{avlControlador.adicionarNodo()}"
                                  update="@all" />
                 <p:commandButton value="InOrden" action="#{avlControlador.habilitarInOrden()}" update="@all" />
+                <p:commandButton value="PosOrden" action="#{avlControlador.habilitarPosOrden()}" update="@all" ajax="false"/>
+                <p:commandButton value="PorNiveles" action="#{avlControlador.habilitarPorNiveles()}" update="@all" ajax="false"/>
+                <p:commandButton value="NivelOrdenado" action="#{avlControlador.habilitarNivelOrdenado()}" update="@all" ajax="false"/>
+                <p:commandButton value="Hojas" action="#{avlControlador.habilitarHojas()}" update="@all" ajax="false"/>
+                <p:commandButton value="Podar" action="#{avlControlador.podar()}" update="@all" ajax="false"/>
+                <p:commandButton value="Balance" action="#{avlControlador.habilitarBalance()}" update="@all" ajax="false"/>
+                <p:commandButton value="Borrar Mayor" action="#{avlControlador.borrarMayor()}" update="@all" ajax="false"/>
+                <p:commandButton value="Borrar Menor" action="#{avlControlador.borrarMenor()}" update="@all" ajax="false"/>
+                <p:commandButton value="Rama Mayor" action="#{avlControlador.habilitarRamaMayor()}" update="@all" ajax="false"/>
 
 
 
@@ -50,6 +59,77 @@
 
             </p:panel>
         </h:panelGroup>
+        
+        <p:panel header="PreOrden">
+            <p:dataTable var="data" value="#{avlControlador.arbol.preOrden()}">
+                    <p:column headerText="Número">
+                        <h:outputText value="#{data}" />
+                    </p:column>
+
+                </p:dataTable>
+        </p:panel>
+        
+        <h:panelGroup rendered="#{avlControlador.verPosOrden}">
+            <p:panel header="PosOrden">
+                <p:dataTable var="data" value="#{avlControlador.arbol.posOrden()}">
+                    <p:column headerText="PosOrden">
+                        <h:outputText value="#{data}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{avlControlador.verPorNiveles}">
+            <p:panel header="PorNiveles">
+                <p:dataTable var="dataPorNiveles" value="#{avlControlador.arbol.impNiveles()}">
+                    <p:column headerText="PorNiveles">
+                        <h:outputText value="#{dataPorNiveles}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{avlControlador.verNivelOrdenado}">
+            <p:panel header="NivelOrdenado">
+                <p:dataTable var="dataNivelOrdenado" value="#{avlControlador.arbol.imprimirNivel()}">
+                    <p:column headerText="NivelOrdenado">
+                        <h:outputText value="#{dataNivelOrdenado}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{avlControlador.verHojas}">
+            <p:panel header="Hojas">
+                <p:dataTable var="dataHojas" value="#{avlControlador.arbol.getHojas()}">
+                    <p:column headerText="Hojas">
+                        <h:outputText value="#{dataHojas}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{avlControlador.verRamaMayor}">
+            <p:panel header="RamaMayor">
+                <p:dataTable var="dataRamaMayor" value="#{avlControlador.arbol.ObtenerRamamayor()}">
+                        <p:column headerText="RamaMayor">
+                        <h:outputText value="#{dataRamaMayor}" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+        </h:panelGroup>
+        
+        <p:diagram id="pnlArbolTerminados" value="#{avlControlador.modelArbol2}" style="height:400px" styleClass="ui-widget-content" />
         
       </ui:define>
 
